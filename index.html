@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ByteFlow</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/bundle.js"></script>
+    <meta name="description" content="Website for ByteFlow" />
+  </head>
+  <body>
+    <div id="terminal">
+      <div id="mainInfo">
+        <div>
+          <div class="inlineContainer">
+            <pre>
+ _______               __                ________  __                         
+|       \             |  \              |        \|  \                        
+| ███████\ __    __  _| ██_     ______  | ████████| ██  ______   __   __   __ 
+| ██__/ ██|  \  |  \|   ██ \   /      \ | ██__    | ██ /      \ |  \ |  \ |  \
+| ██    ██| ██  | ██ \██████  |  ██████\| ██  \   | ██|  ██████\| ██ | ██ | ██
+| ███████\| ██  | ██  | ██ __ | ██    ██| █████   | ██| ██  | ██| ██ | ██ | ██
+| ██__/ ██| ██__/ ██  | ██|  \| ████████| ██      | ██| ██__/ ██| ██_/ ██_/ ██
+| ██    ██ \██    ██   \██  ██ \██     \| ██      | ██ \██    ██ \██   ██   ██
+ \███████  _\███████    \████   \███████ \██       \██  \██████   \█████\████ 
+          |  \__| ██                                                          
+           \██    ██                                                          
+            \██████                                                           
+        </pre
+            >
+            <img src="img/logoGreen.svg" alt class="avatar" />
+          </div>
+          <br />
+          Welcome to ByteFlow website!
+          <br />
+          <div id="helpCmdList"></div>
+        </div>
+      </div>
+      <div id="output"></div>
+      <div id="input" class="command-input">
+        <span id="prompt">
+          <span class="ownerTerminal"><b>geral@byteflow.pt</b></span
+          ><b>:~$</b>
+        </span>
+
+        <input
+          type="text"
+          id="cmd"
+          oninput="showSuggestions()"
+          onkeydown="handleKeyDown(event)"
+        />
+      </div>
+
+      <div id="suggestions"></div>
+    </div>
+  </body>
+</html>
