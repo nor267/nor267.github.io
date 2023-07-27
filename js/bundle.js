@@ -23,7 +23,10 @@ window.addEventListener("DOMContentLoaded", function () {
         else if ("telegram" === i || "tg" === i)
           window.location.href = "https://t.me/ImZachey";
         else if ("email" === i || "em" === i)
+        {
           window.location.href = "mailto:geral@byteflow.pt";
+          e.innerHTML += email;
+        }
         else if ("steam" === i || "st" === i)
           window.location.href = "https://steamcommunity.com/id/zachey01";
         else if ("youtube" === i || "yt" === i)
@@ -135,7 +138,8 @@ let suggestions = [
     '\n<div class="container">\n  <div class="flex">\n    <h2>HTML/EJS:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem1"></div>\n    </div>\n    <h3>100%</h3>\n  </div>\n\n  <div class="flex">\n    <h2>CSS/SCSS:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem2"></div>\n    </div>\n    <h3>100%</h3>\n  </div>\n\n  <div class="flex">\n    <h2>JS:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem3"></div>\n    </div>\n    <h3>95%</h3>\n  </div>\n\n  <div class="flex">\n    <h2>TS:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem4"></div>\n    </div>\n    <h3>55%</h3>\n  </div>\n\n  <div class="flex">\n    <h2>NODE.JS:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem5"></div>\n    </div>\n    <h3>85%</h3>\n  </div>\n\n  <div class="flex">\n    <h2>REACT.JS:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem6"></div>\n    </div>\n    <h3>15%</h3>\n  </div>\n\n  <div class="flex">\n    <h2>GO:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem7"></div>\n    </div>\n    <h3>5%</h3>\n  </div>\n\n  <div class="flex">\n  <h2>RUST:</h2>\n  <div class="skillBar">\n    <div class="skillBarItem8"></div>\n  </div>\n  <h3>5%</h3>\n</div>\n</div>',
   projectCmd =
     '\n<div class="projectsDiv">\n<article\n  class="article-wrapper"\n  onclick="linkHref(\'https://github.com/zachey01/MimiCMS/\')"\n>\n  <div class="project-info">\n    <div class="flex-pr">\n      <div class="project-title text-nowrap">MimiCMS</div>\n    </div>\n    <div class="flex-pr">\n      <p class="project-description">\n        Modular, fast CMS for <code>CS:GO</code>, <code>CS2</code> (coming soon)\n        servers.\n      </p>\n    </div>\n  </div>\n</article>\n\n<article\n  class="article-wrapper"\n  onclick="linkHref(\'https://github.com/zachey01/terminalPortfolio\')"\n>\n  <div class="project-info">\n    <div class="flex-pr">\n      <div class="project-title text-nowrap">terminal<br />Portfolio</div>\n    </div>\n    <div class="flex-pr">\n      <p class="project-description">\n        A personal website styled for UNIX terminal.\n      </p>\n    </div>\n  </div>\n</article>\n\n</div>\n',
-  blogCmd = '\n<div class="blogArticle" id="blogArticles">\n\n</div>\n';
+  blogCmd = '\n<div class="blogArticle" id="blogArticles">\n\n</div>\n',
+  email =    '\n  <br>Email us to: <br />\n geral@byteflow.pt  <br />\n';
 (function (o, d, l) {
   try {
     o.f = (o) =>
