@@ -1,3 +1,13 @@
+
+window.addEventListener("click", function (evt) {
+  //console.dir(this);
+  //note evt.target can be a nested element, not the body element, resulting in misfires
+  //console.log(evt.target);
+  document.getElementById("cmd").focus();
+  //alert("body clicked");
+});
+
+
 window.addEventListener("DOMContentLoaded", function () {
   let n = document.getElementById("cmd");
   n.focus(), (document.getElementById("helpCmdList").innerHTML = helpCmd);
@@ -26,6 +36,7 @@ window.addEventListener("DOMContentLoaded", function () {
         {
           window.location.href = "mailto:geral@byteflow.pt";
           e.innerHTML += email;
+          
         }
         else if ("steam" === i || "st" === i)
           window.location.href = "https://steamcommunity.com/id/zachey01";
@@ -69,9 +80,14 @@ window.addEventListener("DOMContentLoaded", function () {
             ? ((e.innerHTML = ""), (s.innerHTML = ""))
             : (e.innerHTML += "<div>Command not found</div>");
         e.scrollTop = e.scrollHeight;
+        window.scrollTo(0,9999);
+        document.getElementById("cmd").focus();
+       
       }
+      
     });
 });
+
 let currentSuggestionIndex = -1;
 function showSuggestions() {
   let n = document.getElementById("cmd"),
@@ -93,6 +109,7 @@ function showSuggestions() {
     ? n.classList.add("command-entered")
     : n.classList.remove("command-entered");
 }
+
 function handleKeyDown(n) {
   var e,
     s = document.getElementById("suggestions"),
