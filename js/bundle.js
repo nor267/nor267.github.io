@@ -67,7 +67,7 @@ window.addEventListener("DOMContentLoaded", function () {
             ? (e.innerHTML += helpCmd)
             : "clear" === i || "c" === i
             ? ((e.innerHTML = ""), (s.innerHTML = ""))
-            : (e.innerHTML += "<div>Not found</div>");
+            : (e.innerHTML += "<div>Command not found</div>");
         e.scrollTop = e.scrollHeight;
       }
     });
