@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", function () {
         )
           e.innerHTML += skillsBar;
         else if ("github" === i || "gh" === i)
-          window.location.href = "https://github.com/zachey01";
+          window.location.href = "https://github.com/ByteFlowGit";
         else if ("discord" === i || "ds" === i)
           window.location.href =
             "https://discord.com/users/1033246411363471472";
@@ -120,7 +120,6 @@ function linkHref(n) {
 }
 let suggestions = [
     "help",
-    "skills",
     "clear",
     "projects",
     "blog",
@@ -133,7 +132,7 @@ let suggestions = [
     "youtube",
   ],
   helpCmd =
-    '\n  <br>Available commands: <br />\n  [<span class="commandName">about</span>]\n  <br />\n  [<span class="commandName">skills</span>]\n  <br /><br />\n  [<span class="commandName">help</span>]\n  <br />  [<span class="commandName">clear</span>]\n  <br /><br />\n  Contact us: <br />\n  [<span class="commandName">email</span>]',
+    '\n  <br>Available commands: <br />\n  [<span class="commandName">about</span>]\n  <br />\n  [<span class="commandName">projects</span>]\n  <br /><br />\n  [<span class="commandName">help</span>]\n  <br />  [<span class="commandName">clear</span>]\n  <br /><br />\n  Contact us: <br />\n  [<span class="commandName">email</span>]',
   skillsBar =
     '\n<div class="container">\n  <div class="flex">\n    <h2>HTML/EJS:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem1"></div>\n    </div>\n    <h3>100%</h3>\n  </div>\n\n  <div class="flex">\n    <h2>CSS/SCSS:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem2"></div>\n    </div>\n    <h3>100%</h3>\n  </div>\n\n  <div class="flex">\n    <h2>JS:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem3"></div>\n    </div>\n    <h3>95%</h3>\n  </div>\n\n  <div class="flex">\n    <h2>TS:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem4"></div>\n    </div>\n    <h3>55%</h3>\n  </div>\n\n  <div class="flex">\n    <h2>NODE.JS:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem5"></div>\n    </div>\n    <h3>85%</h3>\n  </div>\n\n  <div class="flex">\n    <h2>REACT.JS:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem6"></div>\n    </div>\n    <h3>15%</h3>\n  </div>\n\n  <div class="flex">\n    <h2>GO:</h2>\n    <div class="skillBar">\n      <div class="skillBarItem7"></div>\n    </div>\n    <h3>5%</h3>\n  </div>\n\n  <div class="flex">\n  <h2>RUST:</h2>\n  <div class="skillBar">\n    <div class="skillBarItem8"></div>\n  </div>\n  <h3>5%</h3>\n</div>\n</div>',
   projectCmd =
