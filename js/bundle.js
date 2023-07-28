@@ -19,9 +19,9 @@ window.addEventListener("DOMContentLoaded", function () {
     s = document.getElementById("mainInfo");
   document.getElementById("terminal"),
     n.addEventListener("keypress", function (i) {
-      const x="wedwq";
+      //const x="wedwq";
       //x=i.toString();
-      x.toLowerCase();
+      //x.toLowerCase();
       
       if (13 === i.keyCode && "" !== (i = n.value.trim())) {
         if (
@@ -40,7 +40,7 @@ window.addEventListener("DOMContentLoaded", function () {
             "https://discord.com/users/1033246411363471472";
         else if ("telegram" === i || "tg" === i)
           window.location.href = "https://t.me/ImZachey";
-        else if ("email" === i.toLowerCase() || "em" === i.toLowerCase())
+        else if ("mail" === i.toLowerCase() || "email" === i.toLowerCase() || "em" === i)
         {
           window.location.href = "mailto:geral@byteflow.pt";
           e.innerHTML += email;
