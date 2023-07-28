@@ -18,7 +18,7 @@ window.addEventListener("DOMContentLoaded", function () {
       if (13 === i.keyCode && "" !== (i = n.value.trim())) {
         if (
           ((e.innerHTML +=
-            "<div><span class='ownerTerminal'><b>geral@byteflow.pt</b></span>:<b>~$</b> " +
+            "<div><span class='ownerTerminal'><b>user@byteflow</b></span>:<b>~$</b> " +
             i +
             "</div>"),
           (n.value = ""),
