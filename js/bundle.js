@@ -7,6 +7,10 @@ window.addEventListener("click", function (evt) {
   //alert("body clicked");
 });
 
+function openInNewTab(url) {
+  window.open(url, '_blank').focus();
+  }
+
 
 window.addEventListener("DOMContentLoaded", function () {
   let n = document.getElementById("cmd");
@@ -15,6 +19,10 @@ window.addEventListener("DOMContentLoaded", function () {
     s = document.getElementById("mainInfo");
   document.getElementById("terminal"),
     n.addEventListener("keypress", function (i) {
+      const x="wedwq";
+      //x=i.toString();
+      x.toLowerCase();
+      
       if (13 === i.keyCode && "" !== (i = n.value.trim())) {
         if (
           ((e.innerHTML +=
@@ -25,18 +33,18 @@ window.addEventListener("DOMContentLoaded", function () {
           "skills" === i || "s" === i)
         )
           e.innerHTML += skillsBar;
-        else if ("github" === i || "gh" === i)
-          window.location.href = "https://github.com/ByteFlowGit";
+        else if ("github" === i.toLowerCase() || "gh" === i.toLowerCase())
+          openInNewTab("https://github.com/ByteFlowGit");
         else if ("discord" === i || "ds" === i)
           window.location.href =
             "https://discord.com/users/1033246411363471472";
         else if ("telegram" === i || "tg" === i)
           window.location.href = "https://t.me/ImZachey";
-        else if ("email" === i || "em" === i)
+        else if ("email" === i.toLowerCase() || "em" === i.toLowerCase())
         {
           window.location.href = "mailto:geral@byteflow.pt";
           e.innerHTML += email;
-          
+          //alert(i); 
         }
         else if ("steam" === i || "st" === i)
           window.location.href = "https://steamcommunity.com/id/zachey01";
