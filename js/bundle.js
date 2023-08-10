@@ -16,7 +16,33 @@ window.addEventListener("DOMContentLoaded", function () {
   let n = document.getElementById("cmd");
   n.focus(), (document.getElementById("helpCmdList").innerHTML = helpCmd);
   let e = document.getElementById("output"),
-    s = document.getElementById("mainInfo");
+    s = document.getElementById("mainInfo"),
+    isAsking = false
+    messages = [];
+
+    function sendMessages(i) {
+      e.innerHTML += "<div>Loading...</div>"
+      messages.push({
+          role: "user",
+          content: i
+      });
+      axios.post('https://nor267.com/byteflow/request.php', {
+              "messages": JSON.stringify(messages)
+          }, {
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              }
+          })
+          .then(function (response) {
+              console.log(response);
+              messages.push({
+                  role: "assistant",
+                  content: response.data.choices[0].message.content
+              });
+              e.innerHTML += "<div>" + response.data.choices[0].message.content + "</div>"
+              e.innerHTML += "<div>Ask another question or type and enter [<span class='commandName'>exit</span>] to stop the conversation.</div>"
+          });
+  }
   document.getElementById("terminal"),
     n.addEventListener("keypress", function (i) {
       //const x="wedwq";
@@ -33,7 +59,25 @@ window.addEventListener("DOMContentLoaded", function () {
           "skills" === i || "s" === i)
         )
           e.innerHTML += skillsBar;
-        else if ("github" === i.toLowerCase() || "gh" === i.toLowerCase())
+          else if (isAsking) {
+            if (i === "exit") {
+                e.innerHTML += "<div>The conversation is over. You can now use any of the available commands.</div>"
+                isAsking = false;
+                messages = [];
+            } else {
+                if (messages.length === 0) {
+                    axios.get('./instructions.txt').then(function (response) {
+                        messages.push({
+                            role: "system",
+                            content: response.data
+                        });
+                        sendMessages(i)
+                    });
+                } else {
+                    sendMessages(i)
+                }
+            }
+        } else if ("github" === i.toLowerCase() || "gh" === i.toLowerCase())
           openInNewTab("https://github.com/ByteFlowGit");
         else if ("discord" === i || "ds" === i)
           window.location.href =
@@ -81,6 +125,9 @@ window.addEventListener("DOMContentLoaded", function () {
               console.error(n);
             }),
             (e.innerHTML += '<div id="blogDiv"></div>');
+          } else if ("about" === i) {
+            e.innerHTML += "<div>You can now ask any question about Byteflow. To stop the conversation, please type and enter [<span class='commandName'>exit</span>].</div>"
+            isAsking = true;
         } else
           "help" === i
             ? (e.innerHTML += helpCmd)
