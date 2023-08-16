@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 document.addEventListener("input", function (evt) {
     evt.target.id == 'cmd' && showSuggestions()
 });
