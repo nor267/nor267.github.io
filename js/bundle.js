@@ -1,4 +1,4 @@
-ocument.addEventListener("input", function (evt) {
+document.addEventListener("input", function (evt) {
   evt.target.id == 'cmd' && showSuggestions()
 });
 
