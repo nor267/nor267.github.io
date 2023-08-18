@@ -137,7 +137,7 @@ coloquei a execução dos comandos dentro de uma função para não ter de a rep
         setTimeout(() => {
             document.getElementById("cmd").focus();
             document.getElementById("cmd").selectionEnd = 0;
-        }, 10); // o timeout é necessário para que o cursor da texarea fique na posição 0 em vez da 1
+        }, 100); // o timeout é necessário para que o cursor da texarea fique na posição 0 em vez da 1
     }
 
     window.addEventListener("click", function (evt) {
