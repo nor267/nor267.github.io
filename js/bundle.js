@@ -134,8 +134,8 @@ coloquei a execução dos comandos dentro de uma função para não ter de a rep
         }
         e.scrollTop = e.scrollHeight;
         window.scrollTo(0, 9999);
-        document.getElementById("cmd").focus();
         setTimeout(() => {
+            document.getElementById("cmd").focus();
             document.getElementById("cmd").selectionEnd = 0;
         }, 10); // o timeout é necessário para que o cursor da texarea fique na posição 0 em vez da 1
     }
