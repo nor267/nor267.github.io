@@ -1,9 +1,13 @@
-document.addEventListener("input", function (evt) {
+document.addEventListener("textarea", function (evt) {
     evt.target.id == 'cmd' && showSuggestions()
 });
 
 document.addEventListener("keydown", function (evt) {
     evt.target.id == 'cmd' && handleKeyDown(evt)
+});
+
+document.addEventListener("keyup", function (evt) {
+    evt.target.id == 'cmd' && setNewSize(evt.target)
 });
 
 function openInNewTab(url) {
@@ -16,10 +20,13 @@ window.addEventListener("DOMContentLoaded", function () {
     n.focus(), (document.getElementById("helpCmdList").innerHTML = helpCmd);
     let e = document.getElementById("output"),
         s = document.getElementById("mainInfo")
-    //isAsking = false
+    isAbout = false,
     messages = [];
     const prompt = document.getElementById('prompt');
 
+/*
+coloquei a execução dos comandos dentro de uma função para não ter de a repetir no click e no enter
+*/
     function triggerCommand(i) {
         if (
             ((e.innerHTML +=
@@ -30,15 +37,17 @@ window.addEventListener("DOMContentLoaded", function () {
                 "skills" === i || "s" === i)
         )
             e.innerHTML += skillsBar;
-        /*else if (isAsking) {
-            if (i === "exit" && isAsking) {
+
+        else if (isAbout) {
+            if (i === "quit") {
                 e.innerHTML += "<div>The conversation is over. You can now use any of the available commands.</div>"
-                isAsking = false;
-                prompt.innerHTML = `<span class='ownerTerminal'><b>user@byteflow</b></span>:<b>~$</b> `;
+                isAbout = false;
+                prompt.innerHTML = `<span class='ownerTerminal'><b>user@byteflow</b></span>:<b>~$</b> `; // alterar o prompt para o original
+                n.style.textIndent = "198px"; // dar o padding certo na primeira linha da textarea
                 messages = [];
             } else {
                 if (messages.length === 0) {
-                    axios.get('./instructions.txt').then(function (response) {
+                    axios.get('./instructions.txt').then(function (response) { // se não houver ainda mensagens em memória, ir buscar as instruções e enviá-las junto com a mensagem
                         messages.push({
                             role: "system",
                             content: response.data
@@ -49,7 +58,7 @@ window.addEventListener("DOMContentLoaded", function () {
                     sendMessages(i)
                 }
             }
-        }*/ else if ("github" === i.toLowerCase() || "gh" === i.toLowerCase())
+        } else if ("github" === i.toLowerCase() || "gh" === i.toLowerCase())
             openInNewTab("https://github.com/ByteFlowGit");
         else if ("discord" === i || "ds" === i)
             window.location.href =
@@ -95,15 +104,19 @@ window.addEventListener("DOMContentLoaded", function () {
                     console.error(n);
                 }),
                 (e.innerHTML += '<div id="blogDiv"></div>');
-        } else if ("about" === i || "ask" === i) {
+        } else if ("ask" === i) {
             e.innerHTML += `<div>Copyright (c) 2019-2023 ByteFlow.<br>
            ASK 3.1b BETA (Jul 16th 2023). Usage:<br>
            ask {question}<br>
            Example:<br>
            [<span class="commandName">ask What is byteflow?</span>]</div>`
-            //isAsking = true;
-        } else if (i.startsWith("about ") || i.startsWith("ask ")) {
-            const message = i.startsWith("about ") ? i.substring(6) : i.substring(4);
+        } else if ("about" === i) {
+            e.innerHTML += "<div>You can now ask any question about Byteflow. To stop the conversation, please type and enter [<span class='commandName'>quit</span>].</div>"
+            prompt.innerHTML = "<b>></b>" // colocar o prompt como >
+            n.style.textIndent = "18px"; // reduzir o padding da primeira linha da textarea
+            isAbout = true;
+        } else if (i.startsWith("ask ")) {
+            const message = i.substring(4); // para remover o "ask "
 
             axios.get('./instructions.txt').then(function (response) {
                 messages.push({
@@ -112,8 +125,6 @@ window.addEventListener("DOMContentLoaded", function () {
                 });
                 sendMessages(message)
             });
-
-            //isAsking = true;
         } else {
             "help" === i ?
                 (e.innerHTML += helpCmd) :
@@ -124,14 +135,15 @@ window.addEventListener("DOMContentLoaded", function () {
         e.scrollTop = e.scrollHeight;
         window.scrollTo(0, 9999);
         document.getElementById("cmd").focus();
+        setTimeout(() => {
+            document.getElementById("cmd").selectionEnd = 0;
+        }, 1); // o timeout é necessário para que o cursor da texarea fique na posição 0 em vez da 1
     }
 
     window.addEventListener("click", function (evt) {
-        //console.dir(this);
-        //note evt.target can be a nested element, not the body element, resulting in misfires
-        //console.log(evt.target);
+
         document.getElementById("cmd").focus();
-        //alert("body clicked");
+
         if (evt.target.classList.contains('commandName')) {
             const command = evt.target.textContent;
             triggerCommand(command);
@@ -141,8 +153,9 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
     function sendMessages(i) {
-        e.innerHTML += "<div>Loading...</div>"
+        e.innerHTML += "<div>Processing...</div>"
         prompt.style.display = "none";
+        n.style.textIndent = "0";
         messages.push({
             role: "user",
             content: i
@@ -161,9 +174,8 @@ window.addEventListener("DOMContentLoaded", function () {
                     content: response.data.choices[0].message.content
                 });
                 e.innerHTML += "<div>" + response.data.choices[0].message.content + "</div>"
-                //e.innerHTML += "<div>Ask another question or type and enter [<span class='commandName'>exit</span>] to stop the conversation.</div>"
-                //prompt.innerHTML = "<b>></b>"
                 prompt.style.display = "unset";
+                n.style.textIndent = isAbout ? "18px" : "198px";
                 e.scrollTop = e.scrollHeight;
                 window.scrollTo(0, 9999);
                 document.getElementById("cmd").focus();
@@ -176,7 +188,9 @@ window.addEventListener("DOMContentLoaded", function () {
             //x.toLowerCase();
 
             if (13 === i.keyCode && "" !== (i = n.value.trim())) {
-                triggerCommand(i);
+                triggerCommand(i.toLowerCase()); // toLowerCase para os comandos funcionarem mesmo com letras maiúsculas
+                
+
             }
         });
 });
@@ -204,10 +218,22 @@ function showSuggestions() {
         n.classList.remove("command-entered");
 }
 
+
+/*
+esta função é necessária para que a altura da textarea aumente caso a linha quebre
+também coloquei o scrollTo para garantir que o cursor da textarea é sempre visível
+*/
+function setNewSize(textarea) {
+    textarea.style.height = "0px";
+    textarea.style.height = textarea.scrollHeight + "px";
+    window.scrollTo(0, 9999);
+ }
+
 function handleKeyDown(n) {
     var e,
         s = document.getElementById("suggestions"),
-        i = s.getElementsByTagName("div");
+        i = s.getElementsByTagName("div"),
+        c = document.getElementsByTagName("cmd");
     "ArrowUp" === n.key ?
         (n.preventDefault(),
             0 < currentSuggestionIndex && currentSuggestionIndex--) :
@@ -218,7 +244,8 @@ function handleKeyDown(n) {
         ((n = document.getElementById("cmd")),
             (e = i[currentSuggestionIndex]) && (n.value = e.textContent),
             (s.innerHTML = ""),
-            n.classList.remove("command-entered"));
+            n.classList.remove("command-entered"),
+            c.value = "");
     for (let n = 0; n < i.length; n++) {
         var l = i[n];
         n === currentSuggestionIndex ?
