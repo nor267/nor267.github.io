@@ -221,12 +221,10 @@ function showSuggestions() {
 
 /*
 esta função é necessária para que a altura da textarea aumente caso a linha quebre
-também coloquei o scrollTo para garantir que o cursor da textarea é sempre visível
 */
 function setNewSize(textarea) {
     textarea.style.height = "0px";
     textarea.style.height = textarea.scrollHeight + "px";
-    window.scrollTo(0, 9999);
  }
 
 function handleKeyDown(n) {
