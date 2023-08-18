@@ -207,6 +207,7 @@ body #terminal #cmd {
     line-height: 22.5px;
     transform: translateY(-3px);
     resize: none;
+    font-family: "Courier New", monospace;
 }
 
 body #terminal #cmd:focus {
